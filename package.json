@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest",
+    "test": "jest --coverage",
     "e2e": "docker run -it --rm --net host -v \"$PWD/__e2e__\":/app/features/ maxdecro/karate-standalone-docker:latest java -jar karate.jar features/"
   },
   "dependencies": {

@@ -6,9 +6,9 @@ COPY . .
 
 ENV PATH=/app/node_modules/.bin:$PATH \
     NODE_ENV=production \
-    PORT=8080
+    PORT=3000
 
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 3000
 ENTRYPOINT ["npm", "start"]

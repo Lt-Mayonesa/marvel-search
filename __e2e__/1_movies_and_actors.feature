@@ -1,7 +1,7 @@
 Feature: Which Marvel movies did each actor play in?
 
   Background:
-    * url 'http://localhost:8080/api/v1'
+    * url 'http://localhost:3000/api/v1'
     * def moviesStructure =
     """
     {

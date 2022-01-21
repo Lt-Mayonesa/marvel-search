@@ -1,7 +1,7 @@
 Feature: Are there 2 different actors who played the same role?
 
   Background:
-    * url 'http://localhost:8080/api/v1'
+    * url 'http://localhost:3000/api/v1'
     * def structure =
     """
     {
