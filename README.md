@@ -72,14 +72,14 @@ Get a list of all the characters in the MCU with the actors that played them.
 ```json
 [
   {
-    "role": "Reed Richards / Mr. Fantastic",
+    "name": "Reed Richards / Mr. Fantastic",
     "actors": [
       "ioan-gruffudd",
       "miles-teller"
     ]
   },
   {
-    "role": "Sue Storm / Invisible Woman",
+    "name": "Sue Storm / Invisible Woman",
     "actors": [
       "jessica-alba",
       "kate-mara"
