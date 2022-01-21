@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const {base_url, movies} = require('./config');
+const {base_url, movies, people, filter_cast_with_people} = require('./config');
 
 const indexRouter = require('./routes');
 const actorsRouter = require('./routes/actors');
@@ -19,6 +19,6 @@ index.use(`${base_url}/`, indexRouter);
 index.use(`${base_url}/actors`, actorsRouter);
 index.use(`${base_url}/characters`, charactersRouter);
 
-module.exports = require('./repositories/data-loader')(movies)
+module.exports = require('./repositories/data-loader')(movies, filter_cast_with_people && people)
     .then(data => __init(data))
     .then(() => index);

@@ -5,7 +5,7 @@ Feature: Are there 2 different actors who played the same role?
     * def structure =
     """
     {
-      role: '#string',
+      name: '#string',
       actors: #[] #string,
     }
     """

@@ -30,6 +30,7 @@ module.exports = {
         'Avengers: Endgame': 299534,
         'Spider-Man: Far From Home': 429617
     },
+    filter_cast_with_people: false,
     people: [
         'Robert Downey Jr.',
         'Chris Evans',

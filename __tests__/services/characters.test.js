@@ -29,7 +29,7 @@ test('there is one actor', async () => {
 
     expect(charactersService.all()).toStrictEqual([
         {
-            role: 'Tony Stark / Iron Man',
+            name: 'Tony Stark / Iron Man',
             actors: [
                 'robert-downey-jr'
             ]
@@ -73,19 +73,19 @@ test('there are multiple actors playing different roles', async () => {
 
     expect(charactersService.all()).toStrictEqual([
         {
-            role: 'Tony Stark / Iron Man',
+            name: 'Tony Stark / Iron Man',
             actors: [
                 'robert-downey-jr'
             ]
         },
         {
-            role: 'James \'Rhodey\' Rhodes',
+            name: 'James \'Rhodey\' Rhodes',
             actors: [
                 'terrence-howard'
             ]
         },
         {
-            role: 'Obadiah Stane / Iron Monger',
+            name: 'Obadiah Stane / Iron Monger',
             actors: [
                 'jeff-bridges'
             ]
@@ -129,7 +129,7 @@ test('there are multiple actors the same role', async () => {
 
     expect(charactersService.all()).toStrictEqual([
         {
-            role: 'Tony Stark / Iron Man',
+            name: 'Tony Stark / Iron Man',
             actors: [
                 'robert-downey-jr',
                 'terrence-howard',

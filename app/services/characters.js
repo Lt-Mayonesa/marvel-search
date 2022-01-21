@@ -17,7 +17,7 @@ function getRoles() {
                     }, acc)
             }
         }, {}))
-        .map(([role, actors]) => ({role, actors}));
+        .map(([name, actors]) => ({name, actors}));
 }
 
 module.exports = {

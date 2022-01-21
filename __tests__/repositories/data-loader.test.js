@@ -3,6 +3,12 @@ const loader = require('../../app/repositories/data-loader')
 
 jest.mock('../../app/clients/the-movie-client')
 
+const people = [
+    'Robert Downey Jr',
+    'Jeff Bridges',
+    'Terrence Howard'
+];
+
 test('load single actor from movie ', async () => {
     client.get.mockImplementation(url => {
         return url === '/movie/123?append_to_response=credits' && {
@@ -16,11 +22,14 @@ test('load single actor from movie ', async () => {
                 ]
             }
         }
-    })
 
-    let res = await loader({
-        'Iron Man': 123
     })
+    let res = await loader(
+        {
+            'Iron Man': 123
+        },
+        people
+    )
 
     expect(res).toStrictEqual({
         'robert-downey-jr': {
@@ -177,7 +186,7 @@ test('load multiple actors from multiple movies', async () => {
     let res = await loader({
         'Iron Man': 123,
         'Iron Man 2': 456
-    })
+    }, people)
 
     expect(res).toStrictEqual({
         'robert-downey-jr': {
@@ -216,6 +225,75 @@ test('load multiple actors from multiple movies', async () => {
         }
     })
 })
+
+test('filter people in MCU but not in people list', async () => {
+    client.get.mockImplementation(url => {
+        return {
+            '/movie/456?append_to_response=credits': {
+                title: 'Iron Man 2',
+                credits: {
+                    cast: [
+                        {
+                            name: 'Robert Downey Jr',
+                            character: 'Tony Stark / Iron Man'
+                        },
+                        {
+                            name: 'Ramon Días',
+                            character: 'El Macho'
+                        }
+                    ]
+                }
+            },
+            '/movie/123?append_to_response=credits': {
+                title: 'Iron Man',
+                credits: {
+                    cast: [
+                        {
+                            name: 'Robert Downey Jr',
+                            character: 'Tony Stark / Iron Man'
+                        },
+                        {
+                            name: 'Jeff Bridges',
+                            character: 'Obadiah Stane / Iron Monger'
+                        }
+                    ]
+                }
+            }
+        }[url]
+    })
+
+    let res = await loader({
+        'Iron Man': 123,
+        'Iron Man 2': 456
+    }, people)
+
+    expect(res).toStrictEqual({
+        'robert-downey-jr': {
+            name: 'Robert Downey Jr',
+            slug: 'robert-downey-jr',
+            characters: {
+                'Tony Stark / Iron Man': [
+                    'Iron Man',
+                    'Iron Man 2'
+                ]
+            },
+            movies: {
+                'Iron Man': ['Tony Stark / Iron Man'],
+                'Iron Man 2': ['Tony Stark / Iron Man'],
+            }
+        },
+        'jeff-bridges': {
+            name: 'Jeff Bridges',
+            slug: 'jeff-bridges',
+            characters: {
+                'Obadiah Stane / Iron Monger': ['Iron Man']
+            },
+            movies: {
+                'Iron Man': ['Obadiah Stane / Iron Monger'],
+            }
+        }
+    })
+});
 
 //TODO: add logic to handle server errors and skip movies with them
 test('dont handle request errors', async () => {

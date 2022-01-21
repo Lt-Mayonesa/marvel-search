@@ -16,16 +16,23 @@ function collapseToArray(obj, key, collapseOn, value) {
         obj[key][collapseOn] = [value]
 }
 
-module.exports = async (movies) => Promise.all(Object.values(movies)
+module.exports = async (movies, people) => (await Promise.all(Object.values(movies)
     .map(async movie => {
         let item = await get(`/movie/${movie}?append_to_response=credits`);
 
+        const filterCast = cast => {
+            if (people)
+                return cast.filter(it => people.find(p => it.name.indexOf(p) !== -1));
+            return cast
+        }
+
         return {
             title: item.title,
-            credits: item.credits.cast.map(it => ({
-                name: it.name,
-                character: it.character
-            }))
+            credits: filterCast(item.credits.cast)
+                .map(it => ({
+                    name: it.name,
+                    character: it.character
+                }))
         }
     }))
     .then(movies => {
@@ -45,4 +52,4 @@ module.exports = async (movies) => Promise.all(Object.values(movies)
             })
         })
         return actors;
-    });
+    }));
