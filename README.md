@@ -5,8 +5,8 @@ We will need a web server that will answer these questions:
 1. Which Marvel movies did each actor play in? [tests](./__e2e__/1_movies_and_actors.feature)
 2. Actors who played more than one Marvel character? [tests](./__e2e__/2_more_than_one_character.feature)
 3. BONUS – Are there 2 different actors who played the same role? [tests](./__e2e__/3_bonus_differente_roles.feature)
-   > in order to make the BONUS work with the suggested list of people a role/character name sanitization is necesary
-   > to see it work the flag `config.filter_cast_with_people` is set to `false` by default.
+   > in order to make the BONUS work with the suggested list of people a role/character name sanitization is necesary.
+   > To see the filter work the flag `config.filter_cast_with_people` is set to `false` by default.
    > To use only the people in the list it can be set to true.
 
 ## API
